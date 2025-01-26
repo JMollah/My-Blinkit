@@ -102,7 +102,7 @@ const ProductDisplayPage = () => {
             <div>
             </div>
 
-            <div className='my-4  hidden lg:grid gap-3 '>
+            <div className='my-4 hidden lg:grid gap-3'>
                 <div>
                     <p className='font-semibold'>Description</p>
                     <p className='text-base'>{data.description}</p>
@@ -114,7 +114,7 @@ const ProductDisplayPage = () => {
                 {
                   data?.more_details && Object.keys(data?.more_details).map((element,index)=>{
                     return(
-                      <div>
+                      <div key={index}>
                           <p className='font-semibold'>{element}</p>
                           <p className='text-base'>{data?.more_details[element]}</p>
                       </div>
@@ -202,7 +202,7 @@ const ProductDisplayPage = () => {
             </div>
 
             {/****only mobile */}
-            <div className='my-4 grid gap-3 '>
+            <div className='my-4 grid gap-3 lg:hidden'>
                 <div>
                     <p className='font-semibold'>Description</p>
                     <p className='text-base'>{data.description}</p>
