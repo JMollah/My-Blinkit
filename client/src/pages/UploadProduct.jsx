@@ -35,6 +35,7 @@ const UploadProduct = () => {
 
   const [openAddField,setOpenAddField] = useState(false)
   const [fieldName,setFieldName] = useState("")
+  const [loading, setLoading] = useState(false)
 
 
   const handleChange = (e)=>{
@@ -114,6 +115,7 @@ const UploadProduct = () => {
     console.log("data",data)
 
     try {
+      setLoading(true)
       const response = await Axios({
           ...SummaryApi.createProduct,
           data : data
@@ -138,6 +140,8 @@ const UploadProduct = () => {
       }
     } catch (error) {
         AxiosToastError(error)
+    } finally {
+      setLoading(false)
     }
 
 
@@ -409,7 +413,9 @@ const UploadProduct = () => {
                 <button
                   className='bg-primary-100 hover:bg-primary-200 py-2 rounded font-semibold'
                 >
-                  Submit
+                  {
+                    loading ? "Loading..." : "Submit"
+                  }
                 </button>
             </form>
         </div>

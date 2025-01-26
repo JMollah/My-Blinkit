@@ -36,6 +36,7 @@ const EditProductAdmin = ({ close ,data : propsData,fetchProductData}) => {
 
   const [openAddField, setOpenAddField] = useState(false)
   const [fieldName, setFieldName] = useState("")
+  const [loading, setLoading] = useState(false)
 
 
   const handleChange = (e) => {
@@ -115,6 +116,7 @@ const EditProductAdmin = ({ close ,data : propsData,fetchProductData}) => {
     console.log("data", data)
 
     try {
+      setLoading(true)
       const response = await Axios({
         ...SummaryApi.updateProductDetails,
         data: data
@@ -143,6 +145,8 @@ const EditProductAdmin = ({ close ,data : propsData,fetchProductData}) => {
       }
     } catch (error) {
       AxiosToastError(error)
+    } finally {
+      setLoading(false)
     }
 
 
@@ -153,7 +157,7 @@ const EditProductAdmin = ({ close ,data : propsData,fetchProductData}) => {
       <div className='bg-white w-full p-4 max-w-2xl mx-auto rounded overflow-y-auto h-full max-h-[95vh]'>
         <section className=''>
           <div className='p-2   bg-white shadow-md flex items-center justify-between'>
-            <h2 className='font-semibold'>Upload Product</h2>
+            <h2 className='font-semibold'>Update Product</h2>
             <button onClick={close}>
               <IoClose size={20}/>
             </button>
@@ -416,7 +420,9 @@ const EditProductAdmin = ({ close ,data : propsData,fetchProductData}) => {
               <button
                 className='bg-primary-100 hover:bg-primary-200 py-2 rounded font-semibold'
               >
-                Update Product
+                {
+                  loading ? "Loading..." : "Update Product"
+                }
               </button>
             </form>
           </div>
